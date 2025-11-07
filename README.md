@@ -44,11 +44,14 @@ Authentication is handled by Claude Code itself. You have two options:
 ### Using uvx (Recommended)
 
 ```bash
-# Run directly without installation
-uvx --from . cctr "Hello, world!"
+# Run directly from GitHub (no clone required)
+uvx --from git+https://github.com/bigdra50/cctr cctr 'Hello, world!'
+
+# Or from local directory
+uvx --from . cctr 'Hello, world!'
 
 # Or if published to PyPI
-uvx cctr "Hello, world!"
+uvx cctr 'Hello, world!'
 ```
 
 ### Using uv
@@ -75,22 +78,30 @@ uv pip install -e .
 
 ## Quick Start
 
+### No Installation Required
+
+```bash
+# Run directly from GitHub without cloning
+uvx --from git+https://github.com/bigdra50/cctr cctr 'Hello, world!'
+# Output: こんにちは、世界！
+```
+
 ### Basic Translation
 
 ```bash
 # Translate from command line argument
-cctr "Hello, world!"
+cctr 'Hello, world!'
 # Output: こんにちは、世界！
 
 # Translate from stdin
-echo "こんにちは、世界！" | cctr
+echo 'こんにちは、世界！' | cctr
 # Output: Hello, world!
 
 # Translate with explicit target language
-cctr --to ja "Hello, world!"
+cctr --to ja 'Hello, world!'
 
 # Use a different model
-cctr --model sonnet "Translate this text"
+cctr --model sonnet 'Translate this text'
 ```
 
 ### Clipboard Integration
@@ -155,7 +166,7 @@ The tool shows animated progress with real-time updates:
 
 Use `--quiet` to suppress all progress messages:
 ```bash
-cctr --quiet "Hello, world!"
+cctr --quiet 'Hello, world!'
 ```
 
 ### Auto-Translation Logic
@@ -167,8 +178,8 @@ cctr --quiet "Hello, world!"
 
 Example with `native_language=ja`:
 ```bash
-cctr "Hello, world!"        # → こんにちは、世界！
-cctr "こんにちは、世界！"    # → Hello, world!
+cctr 'Hello, world!'        # → こんにちは、世界！
+cctr 'こんにちは、世界！'    # → Hello, world!
 ```
 
 ### Supported Languages
@@ -212,7 +223,7 @@ git log --oneline -1 --format=%s | cctr
 curl https://example.com | cctr
 
 # Chain with other commands
-echo "Hello" | cctr | wc -c
+echo 'Hello' | cctr | wc -c
 ```
 
 ### Batch Translation
@@ -270,7 +281,7 @@ cctr 'Hello World!!!!!'
 
 **Method 2: Pipe input**
 ```bash
-echo "Hello World!!!!!" | cctr
+echo 'Hello World!!!!!' | cctr
 ```
 
 **Method 3: Escape characters**
@@ -284,7 +295,7 @@ cctr "Hello World\!\!\!\!\!"
 
 ```bash
 # Error example
-echo "" | cctr
+echo '' | cctr
 # Error: Empty input text
 ```
 
@@ -331,7 +342,7 @@ black src/
 ruff src/
 
 # Run with debug output
-cctr --debug "test text"
+cctr --debug 'test text'
 ```
 
 ## Tips
